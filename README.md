@@ -40,4 +40,6 @@ In the end, your URL should looks like this:
 https://www.daxboard.com/?resource=<RESOURCE URL>&tenant=<TENANT>&client_id=<CLIENT_ID>&client_scret=<CLIENT_SECRET>
 
 
+> PS. This approach is rather temporary. There will be a fancy form to log into it.
+
 Stay tunned. More details coming soon...
