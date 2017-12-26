@@ -6,6 +6,8 @@
 Daxboard is a "Plug and Play" dashboard for Dynamics 365 FO showing metrics and insights. It communicates with Dynamics 365 FO via REST and Odata.
 By design, Daxboard doesn't store any kind of data (credentials or table records).
 
+![daxboard](https://github.com/anderson-joyle/Daxboard/blob/master/screenshot.PNG)
+
 ## Motivations
 We all know that D365FO has native workspaces, which can be considered dashboards. Native workspaces are well made and work beautifully but contain some limitations (by design):
 * Too specific for eassch module. Managers don't have a macro overview of ths system in a single "screen".
@@ -20,6 +22,12 @@ Daxboard is meant to be:
 
 ## To whom is Daxboard addressed to?
 Daxboard is addressed to be used my directors, managers and support team.
+Ideally Daxboard will contain the following dashboards:
+* Operations
+* Sales
+* Inventory
+* System administration
+* (coming soon...)
 
 ## How does it work?
 To connect on it, you will need to provide the following arguments into you http request:
