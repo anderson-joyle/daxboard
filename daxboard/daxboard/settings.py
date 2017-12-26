@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'operations',
     'sysadmin',
+    'sales',
 ]
 
 MIDDLEWARE = [
