@@ -37,7 +37,7 @@ To connect on it, you will need to provide the following arguments into you http
 * client_secret - Key which is linked to client id e.g. 65H6A23n48j56d3lAUshkCHU561Be98210d4fDzEGA=
 
 In the end, your URL should looks like this:
-https://www.daxboard.com/?resource=<RESOURCE URL>&tenant=<TENANT>&client_id=<CLIENT_ID>&client_scret=<CLIENT_SECRET>
+https://www.daxboard.com/?resource=RESOURCE_URL&tenant=TENANT&client_id=CLIENT_ID&client_scret=CLIENT_SECRET
 
 
 > PS. This approach is rather temporary. There will be a fancy form to log into it.
