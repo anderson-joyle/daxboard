@@ -4,6 +4,10 @@ import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from .services.charts import OperationChartSimple
+
+from common.fetching import Fetcher as DataFetcher
+
 # Create your views here.
 def index(request):
     """
@@ -31,19 +35,19 @@ def index(request):
     resource_sales_order_headers = resource_url + '/data/' + 'SalesOrderHeaders'
     resource_service_sql_diagnostic = resource_url + '/api/services/UserSessionService/AifUserSessionService/GetUserSessionInfo'
 
-    response = requests.post(resource_service_sql_diagnostic, headers=headers)
+    response = requests.post(resource_service_sql_diagnostic, headers=headers, verify=False)
 
     if response.status_code == 200:
         sql_diagnostic_json = response.json()
         context['sql_diagnostic'] = sql_diagnostic_json
 
-    response = requests.get(resource_legal_entites, headers=headers)
+    response = requests.get(resource_legal_entites, headers=headers, verify=False)
 
     if response.status_code == 200:
         legal_entities_json = response.json()['value']
         context['entities'] = legal_entities_json
 
-    response = requests.get(resource_customer_groups, headers=headers)
+    response = requests.get(resource_customer_groups, headers=headers, verify=False)
 
     if response.status_code == 200:
         customer_groups_json = response.json()['value']
@@ -51,7 +55,7 @@ def index(request):
             customer_groups_json = customer_groups_json[:10]
         context['customer_groups'] = customer_groups_json
 
-    response = requests.get(resource_free_text_invoices, headers=headers)
+    response = requests.get(resource_free_text_invoices, headers=headers, verify=False)
 
     if response.status_code == 200:
         free_text_invoices_json = response.json()['value']
@@ -59,7 +63,7 @@ def index(request):
             free_text_invoices_json = free_text_invoices_json[:10]
         context['free_text_invoices'] = free_text_invoices_json
 
-    response = requests.get(resource_sales_order_headers, headers=headers)
+    response = requests.get(resource_sales_order_headers, headers=headers, verify=False)
 
     if response.status_code == 200:
         sales_order_headers_json = response.json()['value']
@@ -70,5 +74,8 @@ def index(request):
     context['is_authenticated'] = request.user.is_authenticated
     context['resource_url'] = resource_url
     context['tenant'] = request.session.get('tenant')
+
+    simpleChart = OperationChartSimple()
+    simpleChart.fetch_data()
 
     return render(request, 'operations/index.html', context)

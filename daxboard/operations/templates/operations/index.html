@@ -7,6 +7,8 @@
 <link href='{% static "css/custom.min.css" %}' rel="stylesheet" type="text/css" />
 {% endblock %}
 
+{% block dashboard_name %}OPERATIONS{% endblock %}
+
 {% block main_content %}
 <br><br><br>
 <div class="row">
@@ -28,52 +30,52 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
                             <div class="visual">
-                                <i class="fa fa-comments"></i>
+                                <i class="fa fa-money"></i>
                             </div>
                             <div class="details">
                                 <div class="number">
-                                <span data-counter="counterup" data-value="1349">1349</span>
+                                <span data-counter="counterup" data-value="256">256</span>
                                 </div>
-                                <div class="desc"> New Feedbacks </div>
+                                <div class="desc"> Open sales orders </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <a class="dashboard-stat dashboard-stat-v2 red" href="#">
                             <div class="visual">
-                                <i class="fa fa-bar-chart-o"></i>
+                                <i class="fa fa-money"></i>
                             </div>
                             <div class="details">
                                 <div class="number">
-                                <span data-counter="counterup" data-value="12,5">12,5</span>M$ 
+                                <span data-counter="counterup" data-value="51">51</span>
                                 </div>
-                                <div class="desc"> Total Profit </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-                            <div class="visual">
-                                <i class="fa fa-shopping-cart"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                <span data-counter="counterup" data-value="{{ sales_order_headers_counter }}">{{ sales_order_headers_counter }}</span>
-                                </div>
-                                <div class="desc"> New Orders </div>
+                                <div class="desc"> Open purchase orders </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
                             <div class="visual">
+                                <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                <span data-counter="counterup" data-value="112.4">112.4</span>K GBP
+                                </div>
+                                <div class="desc"> Daily balance </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-v2 yellow" href="#">
+                            <div class="visual">
                                 <i class="fa fa-globe"></i>
                             </div>
                             <div class="details">
                                 <div class="number"> +
-                                <span data-counter="counterup" data-value="89">89</span>% 
+                                <span data-counter="counterup" data-value="89">23</span>% 
                                 </div>
-                                <div class="desc"> Brand Popularity </div>
+                                <div class="desc"> Since yesterday </div>
                             </div>
                         </a>
                     </div>
