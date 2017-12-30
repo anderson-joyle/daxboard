@@ -5,6 +5,19 @@
 <link href='{% static "css/components.min.css" %}' rel="stylesheet" type="text/css" />
 <link href='{% static "css/layout.min.css" %}' rel="stylesheet" type="text/css" />
 <link href='{% static "css/custom.min.css" %}' rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+<style>
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }	
+
+    #chartdiv2 {
+      width: 100%;
+      height: 500px;
+    }
+    </style>
 {% endblock %}
 
 {% block dashboard_name %}OPERATIONS{% endblock %}
@@ -92,7 +105,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-bar-chart font-dark hide"></i>
-                        <span class="caption-subject font-dark bold uppercase">Site Visits</span>
+                        <span class="caption-subject font-dark bold uppercase">Sales operations</span>
                         <span class="caption-helper">weekly stats...</span>
                     </div>
                     <div class="actions">
@@ -105,7 +118,7 @@
                                 <li>
                                     <a href="javascript:;"> All companies</a>
                                 </li>
-                                {% for entity in entities %}
+                                {% for entity in LegalEntities %}
                                 <li>
                                     <a href="javascript:;"> {{ entity.Name }}
                                         <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
@@ -116,11 +129,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div id="site_statistics_loading" style="display: none;">
-                        <img src="../assets/global/img/loading.gif" alt="loading"> </div>
-                    <div id="site_statistics_content" class="display-none" style="display: block;">
-                        <div id="site_statistics" class="chart" style="padding: 0px; position: relative;"> <canvas class="flot-base" width="458" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 458px; height: 300px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 10px; text-align: center;">02/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 61px; text-align: center;">03/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 112px; text-align: center;">04/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 162px; text-align: center;">05/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 213px; text-align: center;">06/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 264px; text-align: center;">07/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 315px; text-align: center;">08/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 365px; text-align: center;">09/2013</div><div style="position: absolute; max-width: 50px; top: 285px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 416px; text-align: center;">10/2013</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 273px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 20px; text-align: right;">0</div><div style="position: absolute; top: 220px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">1000</div><div style="position: absolute; top: 166px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">2000</div><div style="position: absolute; top: 113px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">3000</div><div style="position: absolute; top: 59px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">4000</div><div style="position: absolute; top: 6px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">5000</div></div></div><canvas class="flot-overlay" width="458" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 458px; height: 300px;"></canvas></div>
-                    </div>
+                    <div id="chartdiv"></div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -155,31 +164,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div id="site_activities_loading" style="display: none;">
-                        <img src="../assets/global/img/loading.gif" alt="loading"> </div>
-                    <div id="site_activities_content" class="display-none" style="display: block;">
-                        <div id="site_activities" style="height: 228px; padding: 0px; position: relative;"> <canvas class="flot-base" width="458" height="228" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 458px; height: 228px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 21px; text-align: center;">DEC</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 68px; text-align: center;">JAN</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 114px; text-align: center;">FEB</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 157px; text-align: center;">MAR</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 205px; text-align: center;">APR</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 250px; text-align: center;">MAY</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 298px; text-align: center;">JUN</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 345px; text-align: center;">JUL</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 388px; text-align: center;">AUG</div><div style="position: absolute; max-width: 45px; top: 209px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 18px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 437px; text-align: center;">SEP</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 197px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 20px; text-align: right;">0</div><div style="position: absolute; top: 149px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 7px; text-align: right;">500</div><div style="position: absolute; top: 100px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">1000</div><div style="position: absolute; top: 52px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">1500</div><div style="position: absolute; top: 3px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 14px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">2000</div></div></div><canvas class="flot-overlay" width="458" height="228" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 458px; height: 228px;"></canvas></div>
-                    </div>
-                    <div style="margin: 20px 0 10px 30px">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-success"> Revenue: </span>
-                                <h3>$13,234</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-info"> Tax: </span>
-                                <h3>$134,900</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-danger"> Shipment: </span>
-                                <h3>$1,134</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-warning"> Orders: </span>
-                                <h3>235090</h3>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="chartdiv2"></div>
                 </div>
             </div>
             <!-- END PORTLET-->
@@ -218,17 +203,17 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                <th scope="col">Order id</th>
                                 <th scope="col">Customer</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Posted</th>
+                                <th scope="col">Total amount</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for free_text_invoice in free_text_invoices %}
+                                {% for sales_order in LatestSalesOrders %}
                                 <tr>
-                                    <th scope="row">{{ free_text_invoice.CustomerAccount }}</th>
-                                    <td>{{ free_text_invoice.AmountCur }}</td>
-                                    <td><span class="badge badge-secondary">No</span></td>
+                                    <th scope="row"><a href="salesorder/{{ sales_order.SalesOrderNumber }}">{{ sales_order.SalesOrderNumber }}</a></th>
+                                    <td>{{ sales_order.SalesOrderName }}</td>
+                                    <td>{{ sales_order.OrderTotalAmount }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -243,7 +228,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-red-sunglo hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">Customer groups</span>
+                            <span class="caption-subject font-dark bold uppercase">Latest sales invoices</span>
                             <span class="caption-helper">top 10 records...</span>
                         </div>
                         <div class="actions">
@@ -268,17 +253,17 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Payment term</th>
+                                <th scope="col">Invoice id</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Total amount</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for customer_group in customer_groups %}
+                                {% for sales_invoice in LatestSalesInvoices %}
                                 <tr>
-                                    <th scope="row">{{ customer_group.CustomerGroupId }}</th>
-                                    <td>{{ customer_group.Description }}</td>
-                                    <td>{{ customer_group.PaymentTermId }}</td>
+                                    <th scope="row"><a href="invoice/{{ sales_invoice.InvoiceNumber }}">{{ sales_invoice.InvoiceNumber }}</a></th>
+                                    <td>{{ sales_invoice.InvoiceCustomerAccountNumber }}</td>
+                                    <td>{{ sales_invoice.TotalInvoiceAmount }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -292,5 +277,172 @@
 
 {% block extra_scripts %}
 <script src='{% static "js/layout.min.js" %}' type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<script>
+    var chart = AmCharts.makeChart( "chartdiv", {
+      "type": "serial",
+      "addClassNames": true,
+      "theme": "light",
+      "autoMargins": false,
+      "marginLeft": 30,
+      "marginRight": 8,
+      "marginTop": 10,
+      "marginBottom": 26,
+      "balloon": {
+        "adjustBorderColor": false,
+        "horizontalPadding": 10,
+        "verticalPadding": 8,
+        "color": "#ffffff"
+      },
+    
+      "dataProvider": [ {
+        "year": 2009,
+        "income": 23.5,
+        "expenses": 21.1
+      }, {
+        "year": 2010,
+        "income": 26.2,
+        "expenses": 30.5
+      }, {
+        "year": 2011,
+        "income": 30.1,
+        "expenses": 34.9
+      }, {
+        "year": 2012,
+        "income": 29.5,
+        "expenses": 31.1
+      }, {
+        "year": 2013,
+        "income": 30.6,
+        "expenses": 28.2,
+        "dashLengthLine": 5
+      }, {
+        "year": 2014,
+        "income": 34.1,
+        "expenses": 32.9,
+        "dashLengthColumn": 5,
+        "alpha": 0.2,
+        "additional": "(projection)"
+      } ],
+      "valueAxes": [ {
+        "axisAlpha": 0,
+        "position": "left"
+      } ],
+      "startDuration": 1,
+      "graphs": [ {
+        "alphaField": "alpha",
+        "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+        "fillAlphas": 1,
+        "title": "Income",
+        "type": "column",
+        "valueField": "income",
+        "dashLengthField": "dashLengthColumn"
+      }, {
+        "id": "graph2",
+        "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+        "bullet": "round",
+        "lineThickness": 3,
+        "bulletSize": 7,
+        "bulletBorderAlpha": 1,
+        "bulletColor": "#FFFFFF",
+        "useLineColorForBulletBorder": true,
+        "bulletBorderThickness": 3,
+        "fillAlphas": 0,
+        "lineAlpha": 1,
+        "title": "Expenses",
+        "valueField": "expenses",
+        "dashLengthField": "dashLengthLine"
+      } ],
+      "categoryField": "year",
+      "categoryAxis": {
+        "gridPosition": "start",
+        "axisAlpha": 0,
+        "tickLength": 0
+      },
+      "export": {
+        "enabled": true
+      }
+    } );
+
+    var chartData = [];
+
+function generateChartData() {
+    var firstDate = new Date();
+    firstDate.setTime(firstDate.getTime() - 10 * 24 * 60 * 60 * 1000);
+
+    for (var i = firstDate.getTime(); i < (firstDate.getTime() + 10 * 24 * 60 * 60 * 1000); i += 60 * 60 * 1000) {
+        var newDate = new Date(i);
+
+        if (i == firstDate.getTime()) {
+            var value1 = Math.round(Math.random() * 10) + 1;
+        } else {
+            var value1 = Math.round(chartData[chartData.length - 1].value1 / 100 * (90 + Math.round(Math.random() * 20)) * 100) / 100;
+        }
+
+        if (newDate.getHours() == 12) {
+            // we set daily data on 12th hour only
+            var value2 = Math.round(Math.random() * 12) + 1;
+            chartData.push({
+                date: newDate,
+                value1: value1,
+                value2: value2
+            });
+        } else {
+            chartData.push({
+                date: newDate,
+                value1: value1
+            });
+        }
+    }
+}
+
+generateChartData();
+
+var chart = AmCharts.makeChart("chartdiv2", {
+    "type": "serial",
+    "theme": "light",
+    "marginRight": 80,
+    "dataProvider": chartData,
+    "valueAxes": [{
+        "axisAlpha": 0.1
+    }],
+
+    "graphs": [{
+        "balloonText": "[[title]]: [[value]]",
+        "columnWidth": 20,
+        "fillAlphas": 1,
+        "title": "daily",
+        "type": "column",
+        "valueField": "value2"
+    }, {
+        "balloonText": "[[title]]: [[value]]",
+        "lineThickness": 2,
+        "title": "intra-day",
+        "valueField": "value1"
+    }],
+    "zoomOutButtonRollOverAlpha": 0.15,
+    "chartCursor": {
+        "categoryBalloonDateFormat": "MMM DD JJ:NN",
+        "cursorPosition": "mouse",
+        "showNextAvailable": true
+    },
+    "autoMarginOffset": 5,
+    "columnWidth": 1,
+    "categoryField": "date",
+    "categoryAxis": {
+        "minPeriod": "hh",
+        "parseDates": true
+    },
+    "export": {
+        "enabled": true
+    }
+});
+
+
+    </script>
 {% endblock %}
 

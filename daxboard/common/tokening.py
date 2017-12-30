@@ -1,7 +1,13 @@
 import requests
+import time
 
 class TokenManager(object):
     def __init__(self, **kargs):
+        self.access_token = ''
+        self.token_type = ''
+        self.expires_on = ''
+        self.resource = ''
+
         self._resource = kargs['resource']
         self._client_id = kargs['client_id']
         self._tenant = kargs['tenant']
@@ -40,7 +46,47 @@ class TokenManager(object):
 
             json_response = response.json()
 
-            return json_response
+            self.access_token = json_response['access_token']
+            self.token_type = json_response['token_type']
+            self.expires_on = json_response['expires_on']
+            self.resource = json_response['resource']
         except:
             pass
+
+    def _is_valid(self):
+        is_valid = True
+        current_timestamp = str(time.time() - 10).split('.')[0]
+        if self.expires_on < current_timestamp:
+            is_valid = False
+        return is_valid
+
+    def get_access_token(self):
+        if not self.access_token:
+            self.generate_token()
+
+        if not self._is_valid():
+            self.generate_token()
+
+        return self.access_token
+
+    def get_token_type(self):
+        if not self.token_type:
+            self.generate_token()
+
+        if not self._is_valid():
+            self.generate_token()
+
+        return self.token_type
+
+    def get_resource(self):
+        if not self.resource:
+            self.generate_token()
+
+        if not self._is_valid():
+            self.generate_token()
+
+        if self.resource.endswith('/'):
+            self.resource = self.resource[:len(self.resource) - 1]
+
+        return self.resource
         
