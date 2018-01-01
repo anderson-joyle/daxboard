@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extra_style %}
+<link href='{% static "css/components.min.css" %}' rel="stylesheet" type="text/css" />
+<link href='{% static "css/layout.min.css" %}' rel="stylesheet" type="text/css" />
+<link href='{% static "css/custom.min.css" %}' rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block dashboard_name %}SALES ORDER{% endblock %}
+
+{% block main_content %}
+<br><br><br> <!-- This need to be changed. -->
+<h2>Sales order id: <b>{{ sales_order_id }}</b></h2>
+{% endblock %}

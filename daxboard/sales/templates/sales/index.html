@@ -1,0 +1,79 @@
+{% extends "sales/base.html" %}
+{% load staticfiles %}
+
+{% block main_content %}
+<br><br><br> <!-- This need to be changed. -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                <i class="icon-bar-chart font-dark hide"></i>
+                <span class="caption-subject font-dark bold uppercase">Batch jobs</span>
+                <span class="caption-helper">current states...</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</a>
+                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i> View details</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+                            <div class="visual">
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                <span data-counter="counterup" data-value="{{ BatchJobErrorSummary }}">{{ BatchJobErrorSummary }}</span>
+                                </div>
+                                <div class="desc"> Failed batch jobs </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+                            <div class="visual">
+                                <i class="fa fa-play" aria-hidden="true"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                <span data-counter="counterup" data-value="{{ BatchJobExecutingSummary }}">{{ BatchJobExecutingSummary }}</span>
+                                </div>
+                                <div class="desc"> Executing batch jobs </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+                            <div class="visual">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                <span data-counter="counterup" data-value="{{ BatchJobWaitingSummary }}">{{ BatchJobWaitingSummary }}</span>
+                                </div>
+                                <div class="desc"> Waiting batch jobs </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a class="dashboard-stat dashboard-stat-v2 yellow" href="#">
+                            <div class="visual">
+                                <i class="fa fa-pause" aria-hidden="true"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                <span data-counter="counterup" data-value="{{ BatchJobWithholdSummary }}">{{ BatchJobWithholdSummary }}</span> 
+                                </div>
+                                <div class="desc"> Withhold batch jobs </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

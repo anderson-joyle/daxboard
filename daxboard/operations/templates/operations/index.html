@@ -1,29 +1,8 @@
-{% extends "base.html" %}
+{% extends "operations/base.html" %}
 {% load staticfiles %}
 
-{% block extra_style %}
-<link href='{% static "css/components.min.css" %}' rel="stylesheet" type="text/css" />
-<link href='{% static "css/layout.min.css" %}' rel="stylesheet" type="text/css" />
-<link href='{% static "css/custom.min.css" %}' rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-
-<style>
-    #chartdiv {
-      width: 100%;
-      height: 500px;
-    }	
-
-    #chartdiv2 {
-      width: 100%;
-      height: 500px;
-    }
-    </style>
-{% endblock %}
-
-{% block dashboard_name %}OPERATIONS{% endblock %}
-
 {% block main_content %}
-<br><br><br>
+<br><br><br> <!-- This need to be changed. -->
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -41,33 +20,33 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+                        <a class="dashboard-stat dashboard-stat-v2 blue" href="detailed/opensalesorders/">
                             <div class="visual">
                                 <i class="fa fa-money"></i>
                             </div>
                             <div class="details">
                                 <div class="number">
-                                <span data-counter="counterup" data-value="256">256</span>
+                                <span data-counter="counterup" data-value="{{ SalesOrdersSummary }}">{{ SalesOrdersSummary }}</span>
                                 </div>
                                 <div class="desc"> Open sales orders </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+                        <a class="dashboard-stat dashboard-stat-v2 red" href="detailed/openpurchorders/">
                             <div class="visual">
                                 <i class="fa fa-money"></i>
                             </div>
                             <div class="details">
                                 <div class="number">
-                                <span data-counter="counterup" data-value="51">51</span>
+                                <span data-counter="counterup" data-value="{{ PurchOrdersSummary }}">{{ PurchOrdersSummary }}</span>
                                 </div>
                                 <div class="desc"> Open purchase orders </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+                        <a class="dashboard-stat dashboard-stat-v2 purple" href="detailed/dailybalance/">
                             <div class="visual">
                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                             </div>
@@ -80,7 +59,7 @@
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 yellow" href="#">
+                        <a class="dashboard-stat dashboard-stat-v2 yellow" href="detailed/metrics/">
                             <div class="visual">
                                 <i class="fa fa-globe"></i>
                             </div>
@@ -97,183 +76,183 @@
         </div>
     </div>
 </div>
-
 <div class="row">
-        <div class="col-lg-6 col-xs-12 col-sm-12">
-            <!-- BEGIN PORTLET-->
-            <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-bar-chart font-dark hide"></i>
-                        <span class="caption-subject font-dark bold uppercase">Sales operations</span>
-                        <span class="caption-helper">weekly stats...</span>
-                    </div>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                        <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
-                                <span class="fa fa-angle-down"> </span>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;"> All companies</a>
-                                </li>
-                                {% for entity in LegalEntities %}
-                                <li>
-                                    <a href="javascript:;"> {{ entity.Name }}
-                                        <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                    </div>
+    <div class="col-lg-6 col-xs-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Sales operations</span>
+                    <span class="caption-helper">weekly stats...</span>
                 </div>
-                <div class="portlet-body">
-                    <div id="chartdiv"></div>
-                </div>
-            </div>
-            <!-- END PORTLET-->
-        </div>
-        <div class="col-lg-6 col-xs-12 col-sm-12">
-            <!-- BEGIN PORTLET-->
-            <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-share font-red-sunglo hide"></i>
-                        <span class="caption-subject font-dark bold uppercase">Revenue</span>
-                        <span class="caption-helper">monthly stats...</span>
-                    </div>
-                    <div class="actions">                        
-                            <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
+                <div class="actions">
+                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
                             <span class="fa fa-angle-down"> </span>
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
                                 <a href="javascript:;"> All companies</a>
                             </li>
-                            {% for entity in entities %}
+                            {% for entity in LegalEntities %}
                             <li>
                                 <a href="javascript:;"> {{ entity.Name }}
                                     <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
                                 </a>
                             </li>
                             {% endfor %}
-                        </ul>                        
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <div id="chartdiv2"></div>
+                        </ul>
                 </div>
             </div>
-            <!-- END PORTLET-->
+            <div class="portlet-body">
+                <div id="chartdiv"></div>
+            </div>
         </div>
+        <!-- END PORTLET-->
     </div>
-
-    <div class="row">
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-                <!-- BEGIN PORTLET-->
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">Latest orders</span>
-                            <span class="caption-helper">top 10 records...</span>
-                        </div>
-                        <div class="actions">
-                                <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                                <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;"> All companies</a>
-                                </li>
-                                {% for entity in entities %}
-                                <li>
-                                    <a href="javascript:;"> {{ entity.Name }}
-                                        <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th scope="col">Order id</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Total amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for sales_order in LatestSalesOrders %}
-                                <tr>
-                                    <th scope="row"><a href="salesorder/{{ sales_order.SalesOrderNumber }}">{{ sales_order.SalesOrderNumber }}</a></th>
-                                    <td>{{ sales_order.SalesOrderName }}</td>
-                                    <td>{{ sales_order.OrderTotalAmount }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+    <div class="col-lg-6 col-xs-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-red-sunglo hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Revenue</span>
+                    <span class="caption-helper">monthly stats...</span>
                 </div>
-                <!-- END PORTLET-->
+                <div class="actions">                        
+                        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                        <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
+                        <span class="fa fa-angle-down"> </span>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;"> All companies</a>
+                        </li>
+                        {% for entity in entities %}
+                        <li>
+                            <a href="javascript:;"> {{ entity.Name }}
+                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>                        
+                </div>
             </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-                <!-- BEGIN PORTLET-->
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-share font-red-sunglo hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">Latest sales invoices</span>
-                            <span class="caption-helper">top 10 records...</span>
-                        </div>
-                        <div class="actions">
-                            <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                            <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="javascript:;"> All companies</a>
-                                </li>
-                                {% for entity in entities %}
-                                <li>
-                                    <a href="javascript:;"> {{ entity.Name }}
-                                        <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th scope="col">Invoice id</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Total amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for sales_invoice in LatestSalesInvoices %}
-                                <tr>
-                                    <th scope="row"><a href="invoice/{{ sales_invoice.InvoiceNumber }}">{{ sales_invoice.InvoiceNumber }}</a></th>
-                                    <td>{{ sales_invoice.InvoiceCustomerAccountNumber }}</td>
-                                    <td>{{ sales_invoice.TotalInvoiceAmount }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- END PORTLET-->
+            <div class="portlet-body">
+                <div id="chartdiv2"></div>
             </div>
         </div>
-    {% endblock %}
+        <!-- END PORTLET-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-xs-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Latest orders</span>
+                    <span class="caption-helper">top 10 records...</span>
+                </div>
+                <div class="actions">
+                        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                        <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;"> All companies</a>
+                        </li>
+                        {% for entity in entities %}
+                        <li>
+                            <a href="javascript:;"> {{ entity.Name }}
+                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">Order id</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Total amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sales_order in LatestSalesOrders %}
+                        <tr>
+                            <th scope="row"><a href="salesorder/{{ sales_order.SalesOrderNumber }}">{{ sales_order.SalesOrderNumber }}</a></th>
+                            <td>{{ sales_order.SalesOrderName }}</td>
+                            <td>{{ sales_order.OrderTotalAmount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+    <div class="col-lg-6 col-xs-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-red-sunglo hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Latest sales invoices</span>
+                    <span class="caption-helper">top 10 records...</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;"> All companies</a>
+                        </li>
+                        {% for entity in entities %}
+                        <li>
+                            <a href="javascript:;"> {{ entity.Name }}
+                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">Invoice id</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Total amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sales_invoice in LatestSalesInvoices %}
+                        <tr>
+                            <th scope="row"><a href="salesinvoice/{{ sales_invoice.InvoiceNumber }}">{{ sales_invoice.InvoiceNumber }}</a></th>
+                            <td>{{ sales_invoice.InvoiceCustomerAccountNumber }}</td>
+                            <td>{{ sales_invoice.TotalInvoiceAmount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+{% endblock %}
+
+
 
 {% block extra_scripts %}
 <script src='{% static "js/layout.min.js" %}' type="text/javascript"></script>
@@ -445,4 +424,3 @@ var chart = AmCharts.makeChart("chartdiv2", {
 
     </script>
 {% endblock %}
-

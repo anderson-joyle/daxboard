@@ -10,23 +10,23 @@ class LatestBase(Fetchable, Contextable):
 
 class LatestSalesInvoices(LatestBase):
     def get_url(self):
-        return '/data/SalesInvoiceHeaders?$top=10&$orderby=InvoiceDate desc'
+        return '/data/SalesInvoiceHeaders?$top=10&$orderby=InvoiceDate desc&$select=InvoiceNumber, TotalInvoiceAmount, InvoiceCustomerAccountNumber, dataAreaId'
 
     def get_context_key(self):
         return __class__.__name__
 
     def get_context_value(self):
-        return self.json_data 
+        return self.json_data['value']
 
 class LatestSalesOrders(LatestBase):
     def get_url(self):
-        return '/data/SalesOrderHeaders?$top=10&$orderby=SalesOrderNumber desc'
+        return '/data/SalesOrderHeaders?$top=10&$orderby=SalesOrderNumber desc&$select=SalesOrderNumber, InvoiceCustomerAccountNumber, OrderTotalAmount, dataAreaId'
 
     def get_context_key(self):
         return __class__.__name__
 
     def get_context_value(self):
-        return self.json_data 
+        return self.json_data['value']
 
 class LegalEntities(LatestBase):
     def get_url(self):
@@ -36,4 +36,14 @@ class LegalEntities(LatestBase):
         return __class__.__name__
 
     def get_context_value(self):
-        return self.json_data 
+        return self.json_data['value']
+
+class UserInfoService(LatestBase):
+    def get_url(self):
+        return '/api/services/UserSessionService/AifUserSessionService/GetUserSessionInfo'
+
+    def get_context_key(self):
+        return __class__.__name__
+
+    def get_context_value(self):
+        return self.json_data

@@ -6,21 +6,32 @@ class SummaryBase(Fetchable, Contextable):
         self._data_fetcher = fetcher
 
     def fetch_data(self):
-        self._data_fetcher.fetch(self)
-        self.json_data = fetcher.fetch(self)    
+        self.json_data = self._data_fetcher.fetch(self)  
 
-class SalesOrdersSummary(SummaryBase)
+class SalesOrdersSummary(SummaryBase):
     def get_url(self):
-        return 'SalesHeaders'
+        return '/data/SalesOrderHeaders?$filter=SalesOrderStatus eq Microsoft.Dynamics.DataEntities.SalesStatus\'Backorder\'&$select=SalesOrderNumber'
 
-class PurchOrdersSummary(SummaryBase)
-    def get_url(self):
-        return 'PurchHeaders'
+    def get_context_key(self):
+        return __class__.__name__
 
-class BalanceSummary(SummaryBase)
-    def get_url(self):
-        raise return 'Balance'
+    def get_context_value(self):
+        return len(self.json_data['value'])
 
-class BigAmountSummary(SummaryBase)
+class PurchOrdersSummary(SummaryBase):
     def get_url(self):
-        raise return 'BigAmountHeaders'
+        return '/data/PurchaseOrderHeaders?$filter=PurchaseOrderStatus eq Microsoft.Dynamics.DataEntities.PurchStatus\'Backorder\'&$select=PurchaseOrderNumber'
+
+    def get_context_key(self):
+        return __class__.__name__
+
+    def get_context_value(self):
+        return len(self.json_data['value'])
+
+class BalanceSummary(SummaryBase):
+    def get_url(self):
+        return 'Balance'
+
+class BigAmountSummary(SummaryBase):
+    def get_url(self):
+        return 'BigAmountHeaders'
