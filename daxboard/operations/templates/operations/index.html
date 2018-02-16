@@ -3,6 +3,7 @@
 
 {% block main_content %}
 <br><br><br> <!-- This need to be changed. -->
+{{ UserInfoService }}
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -15,6 +16,21 @@
                 <div class="actions">
                     <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</a>
                     <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i> View details</a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
+                        <span class="fa fa-angle-down"> </span>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;"> All companies</a>
+                        </li>
+                        {% for entity in entities %}
+                        <li>
+                            <a href="javascript:;"> {{ entity.Name }}
+                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <div class="portlet-body">
@@ -76,43 +92,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-6 col-xs-12 col-sm-12">
-        <!-- BEGIN PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-bar-chart font-dark hide"></i>
-                    <span class="caption-subject font-dark bold uppercase">Sales operations</span>
-                    <span class="caption-helper">weekly stats...</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
-                            <span class="fa fa-angle-down"> </span>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;"> All companies</a>
-                            </li>
-                            {% for entity in LegalEntities %}
-                            <li>
-                                <a href="javascript:;"> {{ entity.Name }}
-                                    <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div id="chartdiv"></div>
-            </div>
-        </div>
-        <!-- END PORTLET-->
-    </div>
-    <div class="col-lg-6 col-xs-12 col-sm-12">
+<div class="row">    
+    <div class="col-lg-9 col-xs-12 col-sm-12">
         <!-- BEGIN PORTLET-->
         <div class="portlet light bordered">
             <div class="portlet-title">
@@ -122,8 +103,8 @@
                     <span class="caption-helper">monthly stats...</span>
                 </div>
                 <div class="actions">                        
-                        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                        <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
                         <span class="fa fa-angle-down"> </span>
                     </a>
@@ -143,6 +124,60 @@
             </div>
             <div class="portlet-body">
                 <div id="chartdiv2"></div>
+                <div style="margin: 20px 0 10px 30px">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                <span class="label label-sm label-success"> Revenue: </span>
+                                <h3>$13,234</h3>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                <span class="label label-sm label-info"> Tax: </span>
+                                <h3>$134,900</h3>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                <span class="label label-sm label-danger"> Shipment: </span>
+                                <h3>$1,134</h3>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                <span class="label label-sm label-warning"> Orders: </span>
+                                <h3>235090</h3>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+    <div class="col-lg-3 col-xs-12 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-red-sunglo hide"></i>
+                    <span class="caption-subject font-dark bold uppercase">Facts</span>
+                </div>
+                <div class="actions">                        
+                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
+                        <span class="fa fa-angle-down"> </span>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;"> All companies</a>
+                        </li>
+                        {% for entity in entities %}
+                        <li>
+                            <a href="javascript:;"> {{ entity.Name }}
+                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="portlet-body">
+                
             </div>
         </div>
         <!-- END PORTLET-->
@@ -182,6 +217,7 @@
                         <tr>
                         <th scope="col">Order id</th>
                         <th scope="col">Customer</th>
+                        <th scope="col">Company</th>
                         <th scope="col">Total amount</th>
                         </tr>
                     </thead>
@@ -190,6 +226,7 @@
                         <tr>
                             <th scope="row"><a href="salesorder/{{ sales_order.SalesOrderNumber }}">{{ sales_order.SalesOrderNumber }}</a></th>
                             <td>{{ sales_order.SalesOrderName }}</td>
+                            <td>{{ sales_order.dataAreaId }}</td>
                             <td>{{ sales_order.OrderTotalAmount }}</td>
                         </tr>
                         {% endfor %}
@@ -232,6 +269,7 @@
                         <tr>
                         <th scope="col">Invoice id</th>
                         <th scope="col">Customer</th>
+                        <th scope="col">Company</th>
                         <th scope="col">Total amount</th>
                         </tr>
                     </thead>
@@ -240,6 +278,7 @@
                         <tr>
                             <th scope="row"><a href="salesinvoice/{{ sales_invoice.InvoiceNumber }}">{{ sales_invoice.InvoiceNumber }}</a></th>
                             <td>{{ sales_invoice.InvoiceCustomerAccountNumber }}</td>
+                            <td>{{ sales_invoice.dataAreaId }}</td>
                             <td>{{ sales_invoice.TotalInvoiceAmount }}</td>
                         </tr>
                         {% endfor %}

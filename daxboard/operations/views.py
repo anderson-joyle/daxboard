@@ -5,15 +5,20 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .services.charts import OperationChartSimple
+
 from .services.summary import (
     SalesOrdersSummary,
     PurchOrdersSummary
 )
+
 from .services.tables import (
     LatestSalesOrders,
     LatestSalesInvoices,
-    LegalEntities,
     UserInfoService,
+)
+
+from common.tables import (
+    LegalEntities,
 )
 
 from common.fetching import Fetcher as DataFetcher
@@ -47,8 +52,8 @@ def index(request):
     purch_orders_summary = PurchOrdersSummary(data_fetcher)
     purch_orders_summary.fetch_data()
 
-    latest_sales_order = LatestSalesOrders(data_fetcher)
-    latest_sales_order.fetch_data()
+    # latest_sales_order = LatestSalesOrders(data_fetcher)
+    # latest_sales_order.fetch_data()
 
     latest_sales_invoice = LatestSalesInvoices(data_fetcher)
     latest_sales_invoice.fetch_data()
@@ -59,11 +64,12 @@ def index(request):
     user_info_service = UserInfoService(data_fetcher)
     user_info_service.fetch_data()
 
-    context[sales_orders_summary.get_context_key()] = sales_orders_summary.get_context_value()
-    context[purch_orders_summary.get_context_key()] = purch_orders_summary.get_context_value()
-    context[latest_sales_order.get_context_key()] = latest_sales_order.get_context_value()
+    # context[sales_orders_summary.get_context_key()] = sales_orders_summary.get_context_value()
+    # context[purch_orders_summary.get_context_key()] = purch_orders_summary.get_context_value()
+    # context[latest_sales_order.get_context_key()] = latest_sales_order.get_context_value()
     context[latest_sales_invoice.get_context_key()] = latest_sales_invoice.get_context_value()
     context[legal_entities.get_context_key()] = legal_entities.get_context_value()
+    context[user_info_service.get_context_key()] = user_info_service.get_context_value()
 
     return render(request, 'operations/index.html', context)
 
