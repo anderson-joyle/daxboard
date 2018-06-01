@@ -1,6 +1,6 @@
 ![daxboard_cover](https://github.com/anderson-joyle/Daxboard/blob/master/daxboard_cover.jpeg)
 ***
-<i>This project is currently under development. You can find the latest code in DEV branch. Proper instructions on how to use it will be provided once a MVP has been released. Contributions (of any kind) are always welcome.</i>
+<i>This project is currently under development. Proper instructions on how to use it will be provided once a MVP has been released. Contributions (of any kind) are always welcome.</i>
 ***
 
 ## What is Daxboard?
