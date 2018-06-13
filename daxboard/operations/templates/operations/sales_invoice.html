@@ -1,15 +1,24 @@
-{% extends "base.html" %}
+{% extends "base_app_site.html" %} 
 {% load staticfiles %}
 
 {% block extra_style %}
-<link href='{% static "css/components.min.css" %}' rel="stylesheet" type="text/css" />
-<link href='{% static "css/layout.min.css" %}' rel="stylesheet" type="text/css" />
-<link href='{% static "css/custom.min.css" %}' rel="stylesheet" type="text/css" />
+<link href='{% static "css/dashboard.css" %}' rel="stylesheet" />
 {% endblock %}
 
-{% block dashboard_name %}SALES INVOICE{% endblock %}
+{% block extra_script %}
+<script src='{% static "js/dashboard.js" %}'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+{% endblock %}
 
 {% block main_content %}
-<br><br><br> <!-- This need to be changed. -->
-<h2>Sales invoice id: <b>{{ sales_invoice_id }}</b></h2>
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Invoice - {{ sales_invoice_id }}</h1>
+        </div>
+        <div class="row row-cards">
+            Coming soon
+        </div>
+    </div>
+</div>
 {% endblock %}

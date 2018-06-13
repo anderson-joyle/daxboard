@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+{% load staticfiles %}
+
+{% block extra_style %}
+<link href='{% static "css/dashboard.css" %}' rel="stylesheet" />
+{% endblock %} 
+
+{% block extra_script %}
+<script src='{% static "js/dashboard.js" %}'></script>
+{% endblock %}
+
+{% block base_site_content %}
+<div class="page-single">
+  <div class="container">
+    <div class="row">
+      <div class="col col-login mx-auto">
+        <div class="text-center mb-6">
+          <img src='{% static "images/logo.png"  %}' class="h-7" alt="">
+        </div>
+        {% if messages %}
+        <ul class="messages">
+          <div class="text-center mb-6">
+          {% for message in messages %}        
+          <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert"></button>
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+        </ul>        
+        {% endif %}
+        <form class="card" action="" method="post">
+          {% csrf_token %}
+          <div class="card-body p-6">
+            <div class="card-title">Login to your account</div>
+            {% for field in form %}
+            <div class="form-group">
+              <label class="form-label" for="{{ field.name }}">{{ field.label }}</label>
+              {{ field }}
+            </div>
+            {% endfor %}
+            <!-- {{ form }} -->
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            <!-- <input type="submit" value="Submit" /> -->
+          </div>
+
+        </form>
+        <div class="text-center text-muted">
+          From <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications">where to get</a> these info?
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

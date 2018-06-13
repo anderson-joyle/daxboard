@@ -32,8 +32,11 @@ class Fetcher(object):
         
 
 class Fetchable(object):
-    def fetch_data(self, fetcher):
+    def fetch_data(self, fetcher, **kwargs):
         raise NotImplementedError
 
     def get_url(self):
+        raise NotImplementedError
+
+    def extra_filters(self, **kwargs):
         raise NotImplementedError

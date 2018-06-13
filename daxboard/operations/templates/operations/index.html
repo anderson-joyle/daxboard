@@ -1,465 +1,451 @@
-{% extends "operations/base.html" %}
+{% extends "base_app_site.html" %} 
 {% load staticfiles %}
 
-{% block main_content %}
-<br><br><br> <!-- This need to be changed. -->
-{{ UserInfoService }}
-<div class="row">
-    <div class="col-md-12">
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                <i class="icon-bar-chart font-dark hide"></i>
-                <span class="caption-subject font-dark bold uppercase">Quick metrics</span>
-                <span class="caption-helper">daily based...</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</a>
-                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i> View details</a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
-                        <span class="fa fa-angle-down"> </span>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:;"> All companies</a>
-                        </li>
-                        {% for entity in entities %}
-                        <li>
-                            <a href="javascript:;"> {{ entity.Name }}
-                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 blue" href="detailed/opensalesorders/">
-                            <div class="visual">
-                                <i class="fa fa-money"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                <span data-counter="counterup" data-value="{{ SalesOrdersSummary }}">{{ SalesOrdersSummary }}</span>
-                                </div>
-                                <div class="desc"> Open sales orders </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 red" href="detailed/openpurchorders/">
-                            <div class="visual">
-                                <i class="fa fa-money"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                <span data-counter="counterup" data-value="{{ PurchOrdersSummary }}">{{ PurchOrdersSummary }}</span>
-                                </div>
-                                <div class="desc"> Open purchase orders </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 purple" href="detailed/dailybalance/">
-                            <div class="visual">
-                                <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                <span data-counter="counterup" data-value="112.4">112.4</span>K GBP
-                                </div>
-                                <div class="desc"> Daily balance </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a class="dashboard-stat dashboard-stat-v2 yellow" href="detailed/metrics/">
-                            <div class="visual">
-                                <i class="fa fa-globe"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number"> +
-                                <span data-counter="counterup" data-value="89">23</span>% 
-                                </div>
-                                <div class="desc"> Since yesterday </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">    
-    <div class="col-lg-9 col-xs-12 col-sm-12">
-        <!-- BEGIN PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-share font-red-sunglo hide"></i>
-                    <span class="caption-subject font-dark bold uppercase">Revenue</span>
-                    <span class="caption-helper">monthly stats...</span>
-                </div>
-                <div class="actions">                        
-                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
-                        <span class="fa fa-angle-down"> </span>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:;"> All companies</a>
-                        </li>
-                        {% for entity in entities %}
-                        <li>
-                            <a href="javascript:;"> {{ entity.Name }}
-                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>                        
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div id="chartdiv2"></div>
-                <div style="margin: 20px 0 10px 30px">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-success"> Revenue: </span>
-                                <h3>$13,234</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-info"> Tax: </span>
-                                <h3>$134,900</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-danger"> Shipment: </span>
-                                <h3>$1,134</h3>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                <span class="label label-sm label-warning"> Orders: </span>
-                                <h3>235090</h3>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <!-- END PORTLET-->
-    </div>
-    <div class="col-lg-3 col-xs-12 col-sm-12">
-        <!-- BEGIN PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-share font-red-sunglo hide"></i>
-                    <span class="caption-subject font-dark bold uppercase">Facts</span>
-                </div>
-                <div class="actions">                        
-                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company
-                        <span class="fa fa-angle-down"> </span>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:;"> All companies</a>
-                        </li>
-                        {% for entity in entities %}
-                        <li>
-                            <a href="javascript:;"> {{ entity.Name }}
-                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="portlet-body">
-                
-            </div>
-        </div>
-        <!-- END PORTLET-->
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6 col-xs-12 col-sm-12">
-        <!-- BEGIN PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-bar-chart font-dark hide"></i>
-                    <span class="caption-subject font-dark bold uppercase">Latest orders</span>
-                    <span class="caption-helper">top 10 records...</span>
-                </div>
-                <div class="actions">
-                        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                        <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:;"> All companies</a>
-                        </li>
-                        {% for entity in entities %}
-                        <li>
-                            <a href="javascript:;"> {{ entity.Name }}
-                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                        <th scope="col">Order id</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Company</th>
-                        <th scope="col">Total amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sales_order in LatestSalesOrders %}
-                        <tr>
-                            <th scope="row"><a href="salesorder/{{ sales_order.SalesOrderNumber }}">{{ sales_order.SalesOrderNumber }}</a></th>
-                            <td>{{ sales_order.SalesOrderName }}</td>
-                            <td>{{ sales_order.dataAreaId }}</td>
-                            <td>{{ sales_order.OrderTotalAmount }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- END PORTLET-->
-    </div>
-    <div class="col-lg-6 col-xs-12 col-sm-12">
-        <!-- BEGIN PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-share font-red-sunglo hide"></i>
-                    <span class="caption-subject font-dark bold uppercase">Latest sales invoices</span>
-                    <span class="caption-helper">top 10 records...</span>
-                </div>
-                <div class="actions">
-                    <a class="btn btn-primary" href="#" role="button"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                    <a class="btn btn-success" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a href="" class="btn dark btn-outline btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Company<span class="fa fa-angle-down"> </span></a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:;"> All companies</a>
-                        </li>
-                        {% for entity in entities %}
-                        <li>
-                            <a href="javascript:;"> {{ entity.Name }}
-                                <span class="label label-sm label-default"> {{ entity.LegalEntityId }} </span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                        <th scope="col">Invoice id</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Company</th>
-                        <th scope="col">Total amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sales_invoice in LatestSalesInvoices %}
-                        <tr>
-                            <th scope="row"><a href="salesinvoice/{{ sales_invoice.InvoiceNumber }}">{{ sales_invoice.InvoiceNumber }}</a></th>
-                            <td>{{ sales_invoice.InvoiceCustomerAccountNumber }}</td>
-                            <td>{{ sales_invoice.dataAreaId }}</td>
-                            <td>{{ sales_invoice.TotalInvoiceAmount }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- END PORTLET-->
-    </div>
-</div>
+{% block extra_style %}
+<link href='{% static "css/dashboard.css" %}' rel="stylesheet" />
 {% endblock %}
 
+{% block extra_script %}
+<script src='{% static "js/dashboard.js" %}'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+{% endblock %}
 
-
-{% block extra_scripts %}
-<script src='{% static "js/layout.min.js" %}' type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+{% block main_content %}
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        Operations
+      </h1>
+    </div>
+    <div class="row row-cards">
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-purple">
+              <i class="fe fe-activity"></i>
+            </div>
+            <div class="h1 m-0">{{ SalesOrdersSummary }}</div>
+            <div class="text-muted mb-4">Open sales order(s)</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-purple">
+                <i class="fe fe-shopping-cart"></i>
+            </div>
+            <div class="h1 m-0">{{ PurchOrdersSummary }}</div>
+            <div class="text-muted mb-4">Open purchase order(s)</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-purple">
+              <i class="fe fe-thumbs-down"></i>
+            </div>
+            <div class="h1 m-0">{{ FreeTextInvoiceSummary }}</div>
+            <div class="text-muted mb-4">Unposted invoice(s)</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-green">
+              3%
+              <i class="fe fe-chevron-up"></i>
+            </div>
+            <div class="h1 m-0">27.3K</div>
+            <div class="text-muted mb-4">From yesterday</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-red">
+              -2%
+              <i class="fe fe-chevron-down"></i>
+            </div>
+            <div class="h1 m-0">$95</div>
+            <div class="text-muted mb-4">From last week</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-lg-2">
+        <div class="card">
+          <div class="card-body p-3 text-center">
+            <div class="text-right text-red">
+              -1%
+              <i class="fe fe-chevron-down"></i>
+            </div>
+            <div class="h1 m-0">621</div>
+            <div class="text-muted mb-4">From fast month</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Latest invoices</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Invoice id</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Amount</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for invoice in LatestSalesInvoices %}
+                  <tr>
+                    <td><a href="salesinvoices/{{ invoice.InvoiceNumber }}">{{ invoice.InvoiceNumber }}</a></td>
+                    <td>{{ invoice.InvoiceCustomerAccountNumber }}</td>
+                    <td>{{ invoice.TotalInvoiceAmount }}</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+              See <a href="salesinvoices/">all invoices</a>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Latest sales orders</h3>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order id</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Amount</th>
+                    <!-- <th></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in LatestSalesOrders %}
+                  <tr>
+                    <td><a href="salesorders/{{ order.SalesOrderNumber }}">{{ order.SalesOrderNumber }}</a></td>
+                    <td>{{ order.InvoiceCustomerAccountNumber }}</td>
+                    <td>{{ order.OrderTotalAmount }}</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+            <div class="card-footer">
+                See <a href="salesorders/">all orders</a>
+              </div>
+          </div>
+        </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card p-3">
+          <div class="d-flex align-items-center">
+            <span class="stamp stamp-md bg-blue mr-3">
+              <i class="fe fe-dollar-sign"></i>
+            </span>
+            <div>
+              <h4 class="m-0"><a href="javascript:void(0)">132 <small>something</small></a></h4>
+              <small class="text-muted">12 waiting something</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card p-3">
+          <div class="d-flex align-items-center">
+            <span class="stamp stamp-md bg-green mr-3">
+              <i class="fe fe-shopping-cart"></i>
+            </span>
+            <div>
+              <h4 class="m-0"><a href="javascript:void(0)">78 <small>something</small></a></h4>
+              <small class="text-muted">32 waiting something</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card p-3">
+          <div class="d-flex align-items-center">
+            <span class="stamp stamp-md bg-red mr-3">
+              <i class="fe fe-users"></i>
+            </span>
+            <div>
+              <h4 class="m-0"><a href="javascript:void(0)">1,352 <small>something</small></a></h4>
+              <small class="text-muted">163 waiting something</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card p-3">
+          <div class="d-flex align-items-center">
+            <span class="stamp stamp-md bg-yellow mr-3">
+              <i class="fe fe-message-square"></i>
+            </span>
+            <div>
+              <h4 class="m-0"><a href="javascript:void(0)">132 <small>something</small></a></h4>
+              <small class="text-muted">16 waiting something</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-cards row-deck">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">DEMO DATA</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap">
+              <thead>
+                <tr>
+                  <th class="w-1">No.</th>
+                  <th>Invoice Subject</th>
+                  <th>Client</th>
+                  <th>VAT No.</th>
+                  <th>Created</th>
+                  <th>Status</th>
+                  <th>Price</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="text-muted">001401</span></td>
+                  <td><a href="invoice.html" class="text-inherit">Design Works</a></td>
+                  <td>
+                    Carlson Limited
+                  </td>
+                  <td>
+                    87956621
+                  </td>
+                  <td>
+                    15 Dec 2017
+                  </td>
+                  <td>
+                    <span class="status-icon bg-success"></span> Paid
+                  </td>
+                  <td>$887</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="text-muted">001402</span></td>
+                  <td><a href="invoice.html" class="text-inherit">UX Wireframes</a></td>
+                  <td>
+                    Adobe
+                  </td>
+                  <td>
+                    87956421
+                  </td>
+                  <td>
+                    12 Apr 2017
+                  </td>
+                  <td>
+                    <span class="status-icon bg-warning"></span> Pending
+                  </td>
+                  <td>$1200</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="text-muted">001403</span></td>
+                  <td><a href="invoice.html" class="text-inherit">New Dashboard</a></td>
+                  <td>
+                    Bluewolf
+                  </td>
+                  <td>
+                    87952621
+                  </td>
+                  <td>
+                    23 Oct 2017
+                  </td>
+                  <td>
+                    <span class="status-icon bg-warning"></span> Pending
+                  </td>
+                  <td>$534</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="text-muted">001404</span></td>
+                  <td><a href="invoice.html" class="text-inherit">Landing Page</a></td>
+                  <td>
+                    Salesforce
+                  </td>
+                  <td>
+                    87953421
+                  </td>
+                  <td>
+                    2 Sep 2017
+                  </td>
+                  <td>
+                    <span class="status-icon bg-secondary"></span> Due in 2 Weeks
+                  </td>
+                  <td>$1500</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="text-muted">001405</span></td>
+                  <td><a href="invoice.html" class="text-inherit">Marketing Templates</a></td>
+                  <td>
+                    Printic
+                  </td>
+                  <td>
+                    87956621
+                  </td>
+                  <td>
+                    29 Jan 2018
+                  </td>
+                  <td>
+                    <span class="status-icon bg-danger"></span> Paid Today
+                  </td>
+                  <td>$648</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="text-muted">001406</span></td>
+                  <td><a href="invoice.html" class="text-inherit">Sales Presentation</a></td>
+                  <td>
+                    Tabdaq
+                  </td>
+                  <td>
+                    87956621
+                  </td>
+                  <td>
+                    4 Feb 2018
+                  </td>
+                  <td>
+                    <span class="status-icon bg-secondary"></span> Due in 3 Weeks
+                  </td>
+                  <td>$300</td>
+                  <td class="text-right">
+                    <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Manage</a>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    </div>
+                  </td>
+                  <td>
+                    <a class="icon" href="javascript:void(0)">
+                      <i class="fe fe-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-    var chart = AmCharts.makeChart( "chartdiv", {
-      "type": "serial",
-      "addClassNames": true,
-      "theme": "light",
-      "autoMargins": false,
-      "marginLeft": 30,
-      "marginRight": 8,
-      "marginTop": 10,
-      "marginBottom": 26,
-      "balloon": {
-        "adjustBorderColor": false,
-        "horizontalPadding": 10,
-        "verticalPadding": 8,
-        "color": "#ffffff"
-      },
-    
-      "dataProvider": [ {
-        "year": 2009,
-        "income": 23.5,
-        "expenses": 21.1
-      }, {
-        "year": 2010,
-        "income": 26.2,
-        "expenses": 30.5
-      }, {
-        "year": 2011,
-        "income": 30.1,
-        "expenses": 34.9
-      }, {
-        "year": 2012,
-        "income": 29.5,
-        "expenses": 31.1
-      }, {
-        "year": 2013,
-        "income": 30.6,
-        "expenses": 28.2,
-        "dashLengthLine": 5
-      }, {
-        "year": 2014,
-        "income": 34.1,
-        "expenses": 32.9,
-        "dashLengthColumn": 5,
-        "alpha": 0.2,
-        "additional": "(projection)"
-      } ],
-      "valueAxes": [ {
-        "axisAlpha": 0,
-        "position": "left"
-      } ],
-      "startDuration": 1,
-      "graphs": [ {
-        "alphaField": "alpha",
-        "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
-        "fillAlphas": 1,
-        "title": "Income",
-        "type": "column",
-        "valueField": "income",
-        "dashLengthField": "dashLengthColumn"
-      }, {
-        "id": "graph2",
-        "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
-        "bullet": "round",
-        "lineThickness": 3,
-        "bulletSize": 7,
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "useLineColorForBulletBorder": true,
-        "bulletBorderThickness": 3,
-        "fillAlphas": 0,
-        "lineAlpha": 1,
-        "title": "Expenses",
-        "valueField": "expenses",
-        "dashLengthField": "dashLengthLine"
-      } ],
-      "categoryField": "year",
-      "categoryAxis": {
-        "gridPosition": "start",
-        "axisAlpha": 0,
-        "tickLength": 0
-      },
-      "export": {
-        "enabled": true
-      }
-    } );
-
-    var chartData = [];
-
-function generateChartData() {
-    var firstDate = new Date();
-    firstDate.setTime(firstDate.getTime() - 10 * 24 * 60 * 60 * 1000);
-
-    for (var i = firstDate.getTime(); i < (firstDate.getTime() + 10 * 24 * 60 * 60 * 1000); i += 60 * 60 * 1000) {
-        var newDate = new Date(i);
-
-        if (i == firstDate.getTime()) {
-            var value1 = Math.round(Math.random() * 10) + 1;
-        } else {
-            var value1 = Math.round(chartData[chartData.length - 1].value1 / 100 * (90 + Math.round(Math.random() * 20)) * 100) / 100;
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
-
-        if (newDate.getHours() == 12) {
-            // we set daily data on 12th hour only
-            var value2 = Math.round(Math.random() * 12) + 1;
-            chartData.push({
-                date: newDate,
-                value1: value1,
-                value2: value2
-            });
-        } else {
-            chartData.push({
-                date: newDate,
-                value1: value1
-            });
-        }
-    }
-}
-
-generateChartData();
-
-var chart = AmCharts.makeChart("chartdiv2", {
-    "type": "serial",
-    "theme": "light",
-    "marginRight": 80,
-    "dataProvider": chartData,
-    "valueAxes": [{
-        "axisAlpha": 0.1
-    }],
-
-    "graphs": [{
-        "balloonText": "[[title]]: [[value]]",
-        "columnWidth": 20,
-        "fillAlphas": 1,
-        "title": "daily",
-        "type": "column",
-        "valueField": "value2"
-    }, {
-        "balloonText": "[[title]]: [[value]]",
-        "lineThickness": 2,
-        "title": "intra-day",
-        "valueField": "value1"
-    }],
-    "zoomOutButtonRollOverAlpha": 0.15,
-    "chartCursor": {
-        "categoryBalloonDateFormat": "MMM DD JJ:NN",
-        "cursorPosition": "mouse",
-        "showNextAvailable": true
-    },
-    "autoMarginOffset": 5,
-    "columnWidth": 1,
-    "categoryField": "date",
-    "categoryAxis": {
-        "minPeriod": "hh",
-        "parseDates": true
-    },
-    "export": {
-        "enabled": true
-    }
-});
-
-
+    });
     </script>
 {% endblock %}
+      
