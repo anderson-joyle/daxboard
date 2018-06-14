@@ -32,15 +32,11 @@ Ideally Daxboard will contain the following dashboards:
 
 ## How does it work?
 To connect on it, you will need to provide the following arguments into you http request:
-* resource - URL to your D365FO e.g.  https://usnconeboxax1aos.cloud.onebox.dynamics.com
-* tenant - Azure Active Directory (AAD) domain e.g. contoso.co.uk
-* client_id - Application id created Azure Active Directory (AAD) e.g. 8f6a7a48-ee99-4cd4-aedf-a81dee112140
-* client_secret - Key which is linked to client id e.g. 65H6A23n48j56d3lAUshkCHU561Be98210d4fDzEGA=
+* D365 FO URL - URL to your D365FO e.g.  https://usnconeboxax1aos.cloud.onebox.dynamics.com
+* Tenant - Azure Active Directory (AAD) domain e.g. contoso.co.uk
+* Client id - Application id created Azure Active Directory (AAD) e.g. 8f6a7a48-ee99-4cd4-aedf-a81dee112140
+* Client secret - Key which is linked to client id e.g. 0089AA9A56Dj56d3lAUshkCas0d9ADF898sDzEGA=
 
-In the end, your URL should looks like this:
-https://www.daxboard.com/?resource=RESOURCE_URL&tenant=TENANT&client_id=CLIENT_ID&client_scret=CLIENT_SECRET
-
-
-> PS. This approach is rather temporary. There will be a fancy form to log into it.
+![login](https://github.com/anderson-joyle/Daxboard/blob/master/login.png)
 
 Stay tunned. More details coming soon...
